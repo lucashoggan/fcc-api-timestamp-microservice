@@ -20,9 +20,19 @@ app.get("/", function (req, res) {
 
 
 // your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+app.get("/api/:date", function (req, res) {
+  if (req.params.date.length ==10) {
+    let unix_time = Date.parse(req.params.date)
+    let utc_time = new Date(unix_time).toUTCString()
+    res.json({unix:unix_time, utc:utc_time})
+  } else {
+    let unix_time = Number.parseInt(req.params.date)
+    let utc_time = new Date(unix_time).toUTCString()
+    res.json({unix:unix_time, utc:utc_time})
+  }
+  
 });
+
 
 
 
